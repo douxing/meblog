@@ -1,14 +1,19 @@
-const path = require('path');
+const resolve = require('path').resolve;
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const extractStyles = new ExtractTextPlugin('styles.css');
+
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index',
+  entry: {
+    client: resolve(__dirname, './src/client'),
+    // server: resolve(__dirname, './src/server')
+  },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    path: resolve(__dirname, 'dist'),
     publicPath: 'dist'
   },
   resolve: {
@@ -20,17 +25,18 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('styles.css'),
+    extractStyles,
     new HtmlWebpackPlugin({
       title: 'Me Blog',
-      template: './src/index.ejs',      
+      template: './src/index.ejs',
+      chunks: ['client'],
       filename: 'index.html'
     }),
   ],
   module: {
     rules: [{
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
+      use: extractStyles.extract({
         fallback: "style-loader",
         use: "css-loader"
       })
