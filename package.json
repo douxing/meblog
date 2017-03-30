@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
+    "material-components-web": "^0.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
