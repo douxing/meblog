@@ -1,20 +1,22 @@
-const path = require('path');
+const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-eval-source-map',
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index.js'
-  ],
+  entry: {
+    client: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      './src/client.js'
+    ]
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.json']
   },
   output: {
-    filename: 'bundle.js'
+    filename: '[name].js'
     // diff point compared to production
     // useless 'cause it is rendered in memory
     // path: path.resolve(__dirname, 'dist'),

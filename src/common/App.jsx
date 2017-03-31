@@ -9,12 +9,15 @@ import styles from './styles.css';
 // You can ignore this warning. For details, see:
 // https://github.com/reactjs/react-router/issues/2182
 export default class App extends Component {
+  constructor () {
+    super(...arguments);
+  }
+  
   render() {
-    console.log('undefined???');
-    console.log(styles);
-    console.log(styles.button);
-    console.log('undefined??? end');
-    
-    return <div className={styles.color}><h1>hello {this.props.name}!</h1></div>;
+    /* console.log('undefined???');
+     * console.log(styles);
+     * console.log(styles.button);
+     * console.log('undefined??? end');*/
+    return <div class={styles.color}><h1>hello {this.props.name}!</h1></div>;
   }
 }

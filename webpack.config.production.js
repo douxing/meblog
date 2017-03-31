@@ -8,13 +8,12 @@ const extractStyles = new ExtractTextPlugin('styles.css');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    client: resolve(__dirname, './src/client'),
-    // server: resolve(__dirname, './src/server')
+    client: resolve(__dirname, './src/client')
   },
   output: {
     filename: '[name].js',
     path: resolve(__dirname, 'dist'),
-    publicPath: 'dist'
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json']
@@ -38,7 +37,14 @@ module.exports = {
       test: /\.css$/,
       use: extractStyles.extract({
         fallback: "style-loader",
-        use: "css-loader"
+        use: [{
+          loader: "css-loader",
+          options: {
+            modules: true
+          }          
+        }, {
+          loader: 'postcss-loader'
+        }]
       })
     }, {
       test: /\.jsx?$/,
